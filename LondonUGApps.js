@@ -22,25 +22,35 @@ let argv = yargs
 underground: {
 
   description:  'Underground Station',
-  alias:  ('underground', 'u')
+  alias:  ('underground', 'u'),
+  string: true
 
 },
 
  zone: {
    description:  'Station location zone',
      alias:  ('zone','z'),
+     string: true
   
  },
 
  line: {
    description:  'Train Line',
-   alias:  ('line','l')
+   alias:  ('line','l'),
+   string: true
  },
 
  selector: {
    description: 'Function Selector All stations or (Zones, Lines, Stations',
    alias:       ('selector', 's')
 
+ },
+
+ help: {
+   'All Underground Stations': 'Type -s 1 and press enter',
+   'Underground Station Search by Zone': 'Type -s 2 -z [Station Zone]',
+   'Station Line Search': 'Type -s 3 Enter Underbround line - ba, bak for bakerloo',
+   alias: ('help', 'h')
  }
 
 
@@ -54,6 +64,22 @@ let lndUnderGound = () => {
 
 //All stations in the JSON file
   if (argv.selector == 1) {
+
+    
+    try {
+
+      if (argv.underground == 'undefined' || argv.line == 'undefined' || argv.zone == 'underfined'
+    
+            || typeof argv.underground == 'string' || typeof argv.line == 'string' || typeof argv.zone == 'string') {
+          throw 'No other options are allowed!!!'
+      } 
+    }
+  
+      catch(error1) {
+      console.log(error1);
+      return
+    };
+
 
   console.log('The London Stations are:');
   console.log('--------------------------------------');
